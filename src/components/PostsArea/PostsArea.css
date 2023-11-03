@@ -1,0 +1,22 @@
+.posts__area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.posts__list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 500px;
+}
+
+.post__list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid green;
+  padding: 5px;
+  word-wrap: break-word;
+}
