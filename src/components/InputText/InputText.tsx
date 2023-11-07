@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
 import "./InputText.css";
+import { TextField } from "@mui/material";
 
 type ColorType =
   | "secondary"

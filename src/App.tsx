@@ -1,6 +1,5 @@
-// import { useState } from "react";
-import { useState, useEffect } from "react";
 import "./App.css";
+import { useState, useEffect } from "react";
 import { InputsArea } from "./components/InputsArea/InputsArea";
 import { PostsArea } from "./components/PostsArea/PostsArea";
 import { v4 as uuidv4 } from "uuid";

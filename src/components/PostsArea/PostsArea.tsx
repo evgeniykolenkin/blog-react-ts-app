@@ -1,6 +1,6 @@
-import { IconButton } from "@mui/material";
-import { PostListType } from "../../App";
 import "./PostsArea.css";
+import { PostListType } from "../../App";
+import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 export type NewPostPropsType = {
@@ -14,23 +14,26 @@ export function PostsArea(props: NewPostPropsType) {
       <h2>Лента</h2>
       <ul className="posts__list">
         {props.posts.map((post) => {
+          //!
           // ? это я пытаюсь сделать каждому посту, пришедшему с API,
-          // ! уникальную дату, но это, походу, нереально хддд
-          // const parseDate = () => {
-          //   const date = new Date();
-          //   const day = date.getDate().toString().padStart(2, "0");
-          //   const month = (date.getMonth() + 1).toString().padStart(2, "0");
-          //   const fullYear = date.getFullYear().toString();
-          //   const hours = date.getHours().toString().padStart(2, "0");
-          //   const minutes = date.getMinutes().toString().padStart(2, "0");
-          //   const seconds = date.getSeconds().toString().padStart(2, "0");
-          //   return `Дата: ${day}.${month}.${fullYear} ${hours}:${minutes}:${seconds}`;
-          // };
+          // ? уникальную дату, но это, походу, нереально хддд
+          const parseDate = () => {
+            const date = new Date();
+            const day = date.getDate().toString().padStart(2, "0");
+            const month = (date.getMonth() + 1).toString().padStart(2, "0");
+            const fullYear = date.getFullYear().toString();
+            const hours = date.getHours().toString().padStart(2, "0");
+            const minutes = date.getMinutes().toString().padStart(2, "0");
+            const seconds = date.getSeconds().toString().padStart(2, "0");
+            return `Дата: ${day}.${month}.${fullYear} ${hours}:${minutes}:${seconds}`;
+          };
+          //!
 
           return (
             <li key={post.id} className="post__list-item">
-              {/* <div>{parseDate()}</div> */}
-              <div>{post.userId}</div>
+              <div>
+                {typeof post.userId === "number" ? parseDate() : post.userId}
+              </div>
               <h3>{post.title}</h3>
               <div>{post.body}</div>
               <div className="icon__btn">
