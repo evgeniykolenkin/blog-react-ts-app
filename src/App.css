@@ -4,3 +4,10 @@
   gap: 30px;
   padding: 10px;
 }
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+    width: 100%;
+  }
+}
