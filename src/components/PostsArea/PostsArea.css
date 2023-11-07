@@ -13,10 +13,22 @@
 }
 
 .post__list-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border: 1px solid green;
+  border-radius: 10px;
+  box-shadow: 23px 27px 18px -15px rgba(34, 80, 78, 0.28);
   padding: 5px;
   word-wrap: break-word;
+}
+
+.post__list-item h3 {
+  width: 450px;
+}
+
+.icon__btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }

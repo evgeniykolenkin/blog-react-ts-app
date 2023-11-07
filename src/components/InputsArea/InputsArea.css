@@ -4,3 +4,11 @@
   gap: 10px;
   width: 500px;
 }
+
+.error {
+  border: 1px solid red;
+}
+
+.snack__bars div {
+  left: 10px;
+}

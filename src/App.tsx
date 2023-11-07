@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { InputsArea } from "./components/InputsArea/InputsArea";
 import { PostsArea } from "./components/PostsArea/PostsArea";
@@ -13,23 +13,14 @@ export type PostListType = {
 };
 
 function App() {
-  const [postsList, setPostsList] = useState<Array<PostListType>>([
-    {
-      userId: 1,
-      id: 1,
-      title:
-        "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: "qui est esse",
-      body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-    },
-  ]);
+  const [postsList, setPostsList] = useState<Array<PostListType>>([]);
 
-  // const [postDate, setPostDate] = useState<number | string>(1);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((data) => setPostsList(data))
+      .catch((error) => console.log(error));
+  }, []);
 
   const addNewPost = (postTitle: string, postBody: string) => {
     const parseDate = () => {
@@ -40,11 +31,8 @@ function App() {
       const hours = date.getHours().toString().padStart(2, "0");
       const minutes = date.getMinutes().toString().padStart(2, "0");
       const seconds = date.getSeconds().toString().padStart(2, "0");
-      return `
-          Дата: ${day}.${month}.${fullYear} ${hours}:${minutes}:${seconds}
-        `;
+      return `Дата: ${day}.${month}.${fullYear} ${hours}:${minutes}:${seconds}`;
     };
-
     const newPost = {
       userId: parseDate(),
       id: uuidv4(),
@@ -52,13 +40,17 @@ function App() {
       body: postBody,
     };
 
-    setPostsList([...postsList, newPost]);
+    setPostsList([newPost, ...postsList]);
+  };
+
+  const deletePostHandler = (id: string | number) => {
+    setPostsList(postsList.filter((post) => post.id !== id));
   };
 
   return (
     <div className="app">
       <InputsArea addNewPost={addNewPost} />
-      <PostsArea posts={postsList} />
+      <PostsArea posts={postsList} deletePostHandler={deletePostHandler} />
     </div>
   );
 }

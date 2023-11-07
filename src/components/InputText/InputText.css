@@ -1,3 +1,23 @@
 .input__text > div {
   width: 100%;
 }
+
+.input__text textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.input__text textarea::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.input__text textarea::-webkit-scrollbar-thumb {
+  background-color: #1976d2;
+  outline: none;
+  border-radius: 10px;
+}
+
+.error {
+  border: 1px solid red;
+  border-radius: 4px;
+}

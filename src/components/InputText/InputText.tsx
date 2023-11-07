@@ -10,6 +10,7 @@ type ColorType =
   | "warning";
 
 type PropsInputTextType = {
+  error: boolean;
   value: string;
   label: string;
   multiline: boolean;
@@ -22,8 +23,9 @@ type PropsInputTextType = {
 
 export function InputText(props: PropsInputTextType) {
   return (
-    <div className="input__text">
+    <div className={"input__text"}>
       <TextField
+        error={props.error}
         onChange={props.onChange}
         value={props.value}
         label={props.label}
