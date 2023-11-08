@@ -21,19 +21,20 @@ export function InputsArea(props: NewPostPropsType) {
   useEffect(() => {
     if (inputTitle.length > 30) {
       setOpenTitleWarning(true);
-      setIsError(true);
-      setIsDisabled(true);
-    } else if (inputText.length > 200) {
+    } else {
+      setOpenTitleWarning(false);
+    }
+    if (inputText.length > 200) {
       setOpenTextWarning(true);
-      setIsError(true);
+    } else {
+      setOpenTextWarning(false);
+    }
+    if (openTitleWarning || openTextWarning) {
       setIsDisabled(true);
     } else {
-      setIsError(false);
-      setOpenTitleWarning(false);
-      setOpenTextWarning(false);
       setIsDisabled(false);
     }
-  }, [inputTitle, inputText]);
+  }, [inputTitle, inputText, openTitleWarning, openTextWarning]);
 
   const onChangeInputTitleHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -60,8 +61,6 @@ export function InputsArea(props: NewPostPropsType) {
     }
     setOpenSuccess(false);
     setOpenError(false);
-    setOpenTitleWarning(false);
-    setOpenTextWarning(false);
   };
 
   const addNewPostHandler = () => {
@@ -88,6 +87,13 @@ export function InputsArea(props: NewPostPropsType) {
         rows={2}
         color={"info"}
       />
+      {openTitleWarning ? (
+        <div className="limit__out">
+          Превышен лимит символов <span>{inputTitle.length}/30</span>
+        </div>
+      ) : (
+        <div className="limit__out"></div>
+      )}
       <InputText
         error={isError}
         value={inputText}
@@ -97,6 +103,13 @@ export function InputsArea(props: NewPostPropsType) {
         rows={4}
         color={"info"}
       />
+      {openTextWarning ? (
+        <div className="limit__out">
+          Превышен лимит символов <span>{inputText.length}/200</span>
+        </div>
+      ) : (
+        <div className="limit__out"></div>
+      )}
       <MyButton
         disabled={isDisabled}
         clearInputs={clearInputs}
@@ -107,7 +120,7 @@ export function InputsArea(props: NewPostPropsType) {
       <div className="snack__bars">
         <Snackbar
           open={openSuccess}
-          autoHideDuration={3000}
+          autoHideDuration={1000}
           onClose={handleClose}
         >
           <Alert
@@ -125,32 +138,6 @@ export function InputsArea(props: NewPostPropsType) {
         >
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
             Поля обязательны
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={openTitleWarning}
-          autoHideDuration={3000}
-          onClose={handleClose}
-        >
-          <Alert
-            onClose={handleClose}
-            severity="warning"
-            sx={{ width: "100%" }}
-          >
-            Превышен лимит символов заголовка {inputTitle.length}/30
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={openTextWarning}
-          autoHideDuration={3000}
-          onClose={handleClose}
-        >
-          <Alert
-            onClose={handleClose}
-            severity="warning"
-            sx={{ width: "100%" }}
-          >
-            Превышен лимит символов текста {inputText.length}/200
           </Alert>
         </Snackbar>
       </div>

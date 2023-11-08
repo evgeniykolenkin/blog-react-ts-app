@@ -13,3 +13,9 @@
 .snack__bars div {
   left: 10px;
 }
+
+.limit__out {
+  height: 26px;
+  padding: 5px;
+  color: #d32f2f;
+}
